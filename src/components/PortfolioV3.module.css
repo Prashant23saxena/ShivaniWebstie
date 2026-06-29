@@ -1,0 +1,67 @@
+.field {
+  display: inline-block;
+  margin-left: 7px;
+  padding: 2px 5px;
+  border: 1px solid rgba(152, 118, 77, 0.34);
+  border-radius: 3px;
+  color: #87663f;
+  background: rgba(248, 244, 237, 0.94);
+  font: 500 9px/1.25 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: 0;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.blockField {
+  display: block;
+  width: fit-content;
+  margin: 6px 0 0;
+}
+
+.root h1 .field,
+.root h2 .field,
+.root h3 .field {
+  font-size: 9px;
+  letter-spacing: 0;
+}
+
+.legend {
+  position: fixed;
+  z-index: 75;
+  right: 18px;
+  bottom: 18px;
+  max-width: 280px;
+  padding: 11px 14px;
+  border: 1px solid #d8d0c6;
+  border-radius: 8px;
+  color: #514c46;
+  background: rgba(255, 253, 249, 0.94);
+  box-shadow: 0 10px 28px rgba(23, 21, 18, 0.1);
+  backdrop-filter: blur(12px);
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.legend strong {
+  color: #171512;
+  font-weight: 600;
+}
+
+.backLink {
+  display: inline-block;
+  margin-top: 5px;
+  color: #98764d;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.placeholder {
+  color: #514c46;
+}
+
+@media (max-width: 760px) {
+  .legend {
+    position: static;
+    margin: 24px 18px;
+  }
+}

@@ -1,0 +1,12 @@
+/* v2 page-scoped global overrides (regular global CSS, only shipped on /v2 route).
+   Kept out of the CSS Module because module "pure" mode forbids bare/ :global(html) selectors. */
+html {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
+@media (max-width: 760px) {
+  html {
+    scroll-snap-type: none;
+  }
+}
