@@ -70,12 +70,12 @@ const capabilities = [
 ];
 
 const strategicCapabilities = [
-  { title: "Diagnose the operating reality", summary: "Start with Gemba walks, interviews, data cuts and process observation to see where work actually breaks." },
-  { title: "Frame the decision problem", summary: "Turn ambiguity into a concise problem statement, fact base, hypotheses and prioritization logic." },
-  { title: "Design the solution architecture", summary: "Translate the diagnosis into levers, business cases, operating routines and practical implementation choices." },
-  { title: "Align decision makers", summary: "Create workshops, narratives and evidence-backed forums that help senior stakeholders choose and commit." },
-  { title: "Run execution cadence", summary: "Install tracking, owners, dashboards and escalation routines so initiatives keep moving after the workshop." },
-  { title: "Scale and embed impact", summary: "Convert pilots into repeatable playbooks, capability building and routines that sustain value over time." },
+  { title: "Diagnose the operating reality", short: "Diagnose the operating reality", summary: "Use Gemba walks, interviews, data cuts and observation to see where work actually breaks.", icon: BriefcaseBusiness },
+  { title: "Frame the decision problem", short: "Frame the decision problem", summary: "Turn ambiguity into a crisp problem statement, fact base, hypotheses and prioritization logic.", icon: Target },
+  { title: "Design the solution architecture", short: "Design the solution architecture", summary: "Translate diagnosis into levers, business cases, operating routines and implementation choices.", icon: Cuboid },
+  { title: "Align decision makers", short: "Align decision makers", summary: "Create workshops, narratives and evidence-backed forums that help stakeholders choose and commit.", icon: Users },
+  { title: "Run execution cadence", short: "Run execution cadence", summary: "Install tracking, owners, dashboards and escalation routines so initiatives keep moving.", icon: FileText },
+  { title: "Scale and embed impact", short: "Scale and embed impact", summary: "Convert pilots into playbooks, capability building and routines that sustain value over time.", icon: TrendingUp },
 ];
 
 const selectedWork = [
@@ -220,6 +220,7 @@ export default function PortfolioV4() {
   const [active, setActive] = useState("Home");
   const [mobileOpen, setMobileOpen] = useState(false);
   const [workIndex, setWorkIndex] = useState(0);
+  const [strategyIndex, setStrategyIndex] = useState(0);
   const [aboutTab, setAboutTab] = useState("Education");
   const workTrackRef = useRef<HTMLDivElement>(null);
 
@@ -336,23 +337,70 @@ export default function PortfolioV4() {
         </Reveal>
       </section>
 
-      <section id="strategy" data-nav="Strategy" className={`${styles.section} ${styles.editorialSection}`}>
-        <Reveal className={`${styles.editorialHeading} ${v4.noSideLabel}`}>
-          <div>
-            <h2>Six moves I use to turn complex work into execution.</h2>
-            <p>A practical strategy-to-implementation rhythm for moving from messy inputs to aligned decisions, owned initiatives and durable operating change.</p>
+      <section id="strategy" data-nav="Strategy" className={`${styles.section} ${styles.editorialSection} ${v4.strategyPhaseSection}`}>
+        <Reveal className={v4.strategyPhaseHero}>
+          <div className={v4.strategyHeroCopy}>
+            <p className={styles.eyebrow}>My strategy phases</p>
+            <h2>Six phases of strategy work I have led.</h2>
+            <p>A practical consulting journey from insight to impact—moving from messy inputs to aligned decisions, owned initiatives and durable operating change.</p>
+          </div>
+
+          <div className={v4.strategyMap} aria-label="Strategy phase journey">
+            <div className={v4.mapBackdrop} aria-hidden>
+              <span className={v4.mountainOne} />
+              <span className={v4.mountainTwo} />
+              <span className={v4.flagPeak}>⚑</span>
+            </div>
+            <svg className={v4.mapRoad} viewBox="0 0 680 170" preserveAspectRatio="none" aria-hidden>
+              <path d="M18 132 C 120 48, 226 70, 322 94 S 510 142, 662 24" />
+              <path d="M20 146 C 126 68, 230 88, 322 112 S 506 156, 668 44" />
+            </svg>
+            <div className={v4.strategyMilestones}>
+              {strategicCapabilities.map((item, index) => {
+                const Icon = item.icon;
+                return (
+                  <button
+                    key={item.title}
+                    className={`${v4.strategyMilestone} ${strategyIndex === index ? v4.strategyMilestoneActive : ""}`}
+                    onClick={() => setStrategyIndex(index)}
+                    onMouseEnter={() => setStrategyIndex(index)}
+                    aria-pressed={strategyIndex === index}
+                  >
+                    <span>{String(index + 1).padStart(2, "0")}</span>
+                    <i><Icon size={27} strokeWidth={1.25} /></i>
+                    <small>{item.short}</small>
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </Reveal>
 
-        <Reveal delay={0.08} className={styles.strategyMatrix}>
+        <Reveal delay={0.08} className={v4.strategyPhaseGrid}>
           {strategicCapabilities.map((item, index) => (
-            <motion.article key={item.title} className={styles.strategyCard} whileHover={reduce ? undefined : { y: -5 }}>
-              <span>0{index + 1}</span>
+            <motion.article
+              key={item.title}
+              className={`${v4.strategyPhaseCard} ${strategyIndex === index ? v4.strategyPhaseCardActive : ""}`}
+              whileHover={reduce ? undefined : { y: -5 }}
+              onMouseEnter={() => setStrategyIndex(index)}
+              onClick={() => setStrategyIndex(index)}
+            >
+              <span className={v4.phaseBadge}>{String(index + 1).padStart(2, "0")}</span>
+              <div className={v4.phaseIcon}>
+                <item.icon size={55} strokeWidth={1.1} />
+              </div>
+              <div>
               <h3>{item.title}</h3>
               <p>{item.summary}</p>
+              </div>
             </motion.article>
           ))}
         </Reveal>
+        <div className={v4.strategyFooterLine}>
+          <span />
+          <strong>Strategy-to-execution. Built for real work.</strong>
+          <span />
+        </div>
       </section>
 
       <section id="work" data-nav="Work" className={`${styles.section} ${styles.editorialSection}`}>
