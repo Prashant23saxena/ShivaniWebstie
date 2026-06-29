@@ -5,24 +5,32 @@ import {
   ArrowLeft,
   ArrowRight,
   BadgeCheck,
+  BarChart3,
   BriefcaseBusiness,
   Boxes,
   CircleDollarSign,
   Cuboid,
   FileText,
+  FlaskConical,
   GraduationCap,
+  Landmark,
   Linkedin,
   Mail,
   Menu,
   MessageCircle,
   Network,
+  Plane,
   Route,
+  Search,
   Sparkles,
   Target,
   TrendingUp,
+  Truck,
+  UserRound,
   Users,
   WandSparkles,
   X,
+  Warehouse,
 } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion, useScroll, useSpring } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
@@ -146,6 +154,16 @@ const selectedWork = [
     impact: "Improved visibility of cross-functional launch risks, supported faster joint resolution and strengthened leadership decision-making for launch readiness.",
   },
 ];
+
+const workVisuals = [
+  { sector: "Logistics", icon: Truck },
+  { sector: "Chemicals", icon: FlaskConical },
+  { sector: "Warehousing", icon: Warehouse },
+  { sector: "Banking", icon: Landmark },
+  { sector: "Aerospace", icon: Plane },
+];
+
+const workCardIcons = [Truck, FlaskConical, Warehouse, Landmark, Plane, Route];
 
 const aboutTabs = [
   { label: "Education", icon: GraduationCap },
@@ -346,15 +364,7 @@ export default function PortfolioV4() {
           </div>
 
           <div className={v4.strategyMap} aria-label="Strategy phase journey">
-            <div className={v4.mapBackdrop} aria-hidden>
-              <span className={v4.mountainOne} />
-              <span className={v4.mountainTwo} />
-              <span className={v4.flagPeak}>⚑</span>
-            </div>
-            <svg className={v4.mapRoad} viewBox="0 0 680 170" preserveAspectRatio="none" aria-hidden>
-              <path d="M18 132 C 120 48, 226 70, 322 94 S 510 142, 662 24" />
-              <path d="M20 146 C 126 68, 230 88, 322 112 S 506 156, 668 44" />
-            </svg>
+            <div className={v4.strategyRoadLine} aria-hidden />
             <div className={v4.strategyMilestones}>
               {strategicCapabilities.map((item, index) => {
                 const Icon = item.icon;
@@ -385,69 +395,93 @@ export default function PortfolioV4() {
               onMouseEnter={() => setStrategyIndex(index)}
               onClick={() => setStrategyIndex(index)}
             >
-              <span className={v4.phaseBadge}>{String(index + 1).padStart(2, "0")}</span>
-              <div className={v4.phaseIcon}>
-                <item.icon size={55} strokeWidth={1.1} />
+              <div className={v4.phaseMarker}>
+                <span className={v4.phaseBadge}>{String(index + 1).padStart(2, "0")}</span>
+                <div className={v4.phaseIcon}>
+                  <item.icon size={30} strokeWidth={1.25} />
+                </div>
               </div>
-              <div>
               <h3>{item.title}</h3>
               <p>{item.summary}</p>
-              </div>
             </motion.article>
           ))}
         </Reveal>
-        <div className={v4.strategyFooterLine}>
-          <span />
-          <strong>Strategy-to-execution. Built for real work.</strong>
-          <span />
-        </div>
       </section>
 
-      <section id="work" data-nav="Work" className={`${styles.section} ${styles.editorialSection}`}>
-        <Reveal className={`${styles.editorialHeading} ${v4.noSideLabel} ${v4.workHeading}`}>
-          <div>
+      <section id="work" data-nav="Work" className={`${styles.section} ${styles.editorialSection} ${v4.workSection}`}>
+        <Reveal className={v4.workHero}>
+          <div className={v4.workIntro}>
+            <p className={styles.eyebrow}>Selected work</p>
             <h2>From operating depth to strategy-led transformation.</h2>
             <p>Selected examples from logistics, financial services and manufacturing. Some client names are masked, while resume-confirmed metrics are retained for review.</p>
           </div>
-        </Reveal>
-
-        <Reveal delay={0.08} className={styles.scrollInterface}>
-          <div className={styles.scrollControls}>
-            <span>Scroll selected work</span>
-            <div>
-              <button aria-label="Scroll work left" onClick={() => scrollTrack(-1)}><ArrowLeft size={17} /></button>
-              <button aria-label="Scroll work right" onClick={() => scrollTrack(1)}><ArrowRight size={17} /></button>
+          <div className={v4.workMeta}>
+            <div className={v4.sectorPanel}>
+              <p className={styles.eyebrow}>Across sectors</p>
+              <div>
+                {workVisuals.map(({ sector, icon: Icon }) => (
+                  <span key={sector}>
+                    <Icon size={28} strokeWidth={1.25} />
+                    {sector}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div className={v4.careerJourneyPanel}>
+              <div>
+                <p className={styles.eyebrow}>Career journey</p>
+                <span>A progression from operational depth to enterprise impact.</span>
+              </div>
+              <div>
+                <button aria-label="Scroll work left" onClick={() => scrollTrack(-1)}><ArrowLeft size={18} /></button>
+                <button aria-label="Scroll work right" onClick={() => scrollTrack(1)}><ArrowRight size={18} /></button>
+              </div>
             </div>
           </div>
-          <div className={styles.workTimelineTrack} ref={workTrackRef}>
-            {selectedWork.map((project, index) => (
-              <button key={project.title} className={`${styles.workChapter} ${workIndex === index ? styles.chapterSelected : ""}`} onClick={() => setWorkIndex(index)} aria-pressed={workIndex === index}>
+        </Reveal>
+
+        <Reveal delay={0.08} className={v4.workCardsWrap}>
+          <div className={v4.workCards} ref={workTrackRef}>
+            {selectedWork.map((project, index) => {
+              const WorkIcon = workCardIcons[index] || BriefcaseBusiness;
+              return (
+              <button key={project.title} className={`${v4.workCard} ${workIndex === index ? v4.workCardActive : ""}`} onClick={() => setWorkIndex(index)} aria-pressed={workIndex === index}>
                 <span className={styles.chapterYear}>{project.year}</span>
                 <i />
+                <div className={v4.workCardTop}>
+                  <span><WorkIcon size={25} strokeWidth={1.25} /></span>
+                  <div>
                 <small>{project.company}</small>
                 <em>{project.industry}</em>
+                  </div>
+                </div>
                 <h3>{project.title}</h3>
                 <p>{project.short}</p>
               </button>
-            ))}
+            );
+            })}
           </div>
         </Reveal>
 
         <AnimatePresence mode="wait">
-          <motion.div className={styles.workDetail} key={workIndex} initial={reduce ? false : { opacity: 0, y: 16 }} animate={reduce ? undefined : { opacity: 1, y: 0 }} exit={reduce ? undefined : { opacity: 0, y: -10 }}>
-            <div>
-              <span>{selectedWork[workIndex].company} · {selectedWork[workIndex].industry} · {selectedWork[workIndex].year}</span>
-              <strong>{selectedWork[workIndex].metric}</strong>
+          <motion.div className={v4.caseSpotlight} key={workIndex} initial={reduce ? false : { opacity: 0, y: 16 }} animate={reduce ? undefined : { opacity: 1, y: 0 }} exit={reduce ? undefined : { opacity: 0, y: -10 }}>
+            <div className={v4.caseLead}>
+              <span>Case spotlight</span>
+              <strong>{selectedWork[workIndex].company}</strong>
+              <p>{selectedWork[workIndex].industry} · {selectedWork[workIndex].year} · {selectedWork[workIndex].metric}</p>
             </div>
             <div>
+              <Search size={27} strokeWidth={1.25} />
               <span>Problem statement</span>
               <p>{selectedWork[workIndex].problem}</p>
             </div>
             <div>
+              <UserRound size={27} strokeWidth={1.25} />
               <span>My role</span>
               <p>{selectedWork[workIndex].role}</p>
             </div>
             <div>
+              <BarChart3 size={27} strokeWidth={1.25} />
               <span>Impact</span>
               <p>{selectedWork[workIndex].impact}</p>
             </div>
