@@ -428,14 +428,8 @@ export default function PortfolioV4() {
               </div>
             </div>
             <div className={v4.careerJourneyPanel}>
-              <div>
-                <p className={styles.eyebrow}>Career journey</p>
-                <span>A progression from operational depth to enterprise impact.</span>
-              </div>
-              <div>
-                <button aria-label="Scroll work left" onClick={() => scrollTrack(-1)}><ArrowLeft size={18} /></button>
-                <button aria-label="Scroll work right" onClick={() => scrollTrack(1)}><ArrowRight size={18} /></button>
-              </div>
+              <button aria-label="Scroll work left" onClick={() => scrollTrack(-1)}><ArrowLeft size={18} /></button>
+              <button aria-label="Scroll work right" onClick={() => scrollTrack(1)}><ArrowRight size={18} /></button>
             </div>
           </div>
         </Reveal>
