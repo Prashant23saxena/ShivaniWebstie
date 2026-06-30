@@ -2,6 +2,34 @@
   --accent: #8f6a3f;
   --accent-soft: rgba(238, 196, 92, 0.22);
   --highlight: #f6d77b;
+  --font-heading: "Manrope", sans-serif;
+  --font-body: "DM Sans", sans-serif;
+  --h1-size: clamp(56px, 5vw, 76px);
+  --h2-size: clamp(38px, 3.5vw, 56px);
+  --h3-size: 22px;
+  --body-size: 15px;
+  --small-size: 12px;
+}
+
+.root h1,
+.root h2,
+.root h3,
+.root h4 {
+  font-family: var(--font-heading);
+}
+
+.root p,
+.root button,
+.root a,
+.root small,
+.root span,
+.root em {
+  font-family: var(--font-body);
+}
+
+.headerSpacer {
+  width: 1px;
+  height: 1px;
 }
 
 .compareChip {
@@ -73,11 +101,11 @@
 .strategyHeroCopy h2 {
   max-width: 560px;
   font-size: clamp(44px, 4.2vw, 64px);
-  line-height: 0.94;
-  letter-spacing: -0.035em;
+  line-height: 0.98;
+  letter-spacing: -0.055em;
   margin-bottom: 18px;
-  font-family: Georgia, "Times New Roman", serif;
-  font-weight: 600;
+  font-family: var(--font-heading);
+  font-weight: 400;
 }
 
 .strategyHeroCopy p:not(:first-child) {
@@ -279,7 +307,7 @@
 }
 
 .strategyPhaseCard h3 {
-  font: 600 22px/1.04 Georgia, "Times New Roman", serif;
+  font: 600 var(--h3-size)/1.08 var(--font-heading);
   letter-spacing: -0.035em;
   margin: 0;
 }
@@ -327,11 +355,11 @@
 
 .workIntro h2 {
   max-width: 720px;
-  font-family: Georgia, "Times New Roman", serif;
-  font-weight: 600;
-  font-size: clamp(44px, 4.2vw, 64px);
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: var(--h2-size);
   line-height: 0.98;
-  letter-spacing: -0.035em;
+  letter-spacing: -0.055em;
   margin-bottom: 20px;
 }
 
@@ -412,7 +440,7 @@
   gap: 0;
   scroll-snap-type: x proximity;
   overscroll-behavior-inline: contain;
-  padding: 34px 2px 14px;
+  padding: 56px 2px 14px;
   scrollbar-width: thin;
   scrollbar-color: var(--accent) #ebe6de;
 }
@@ -424,9 +452,10 @@
 .workCards::before {
   content: "";
   position: absolute;
-  left: 26px;
-  right: 26px;
-  top: 50px;
+  left: 44px;
+  right: auto;
+  top: 31px;
+  width: calc((270px * 6) + (22px * 5) - 88px);
   border-top: 1px solid rgba(23, 21, 18, 0.55);
 }
 
@@ -438,7 +467,7 @@
   border: 1px solid rgba(216, 208, 198, 0.9);
   border-radius: 8px;
   background: rgba(255, 253, 249, 0.68);
-  padding: 48px 20px 20px;
+  padding: 36px 20px 20px;
   text-align: left;
   cursor: pointer;
   box-shadow: 0 10px 26px rgba(23, 21, 18, 0.04);
@@ -459,7 +488,7 @@
 
 .workCard [class*="chapterYear"] {
   position: absolute;
-  top: 4px;
+  top: -38px;
   left: 22px;
   color: var(--ink);
   font-size: 13px;
@@ -468,7 +497,7 @@
 
 .workCard i {
   position: absolute;
-  top: 29px;
+  top: -20px;
   left: 28px;
   width: 12px;
   height: 12px;
@@ -520,7 +549,7 @@
 }
 
 .workCard h3 {
-  font: 600 22px/1.06 Georgia, "Times New Roman", serif;
+  font: 600 21px/1.08 var(--font-heading);
   letter-spacing: -0.03em;
   margin: 12px 0 10px;
 }
@@ -586,7 +615,7 @@
 .caseSpotlight strong {
   display: block;
   color: #fffaf2;
-  font: 600 29px/1.05 Georgia, "Times New Roman", serif;
+  font: 600 27px/1.08 var(--font-heading);
   letter-spacing: -0.025em;
   margin-bottom: 12px;
 }
@@ -629,6 +658,10 @@
   max-height: calc(100svh - 136px);
   overflow-y: auto;
   padding-right: 18px;
+}
+
+.root [class*="educationItem"] i {
+  left: -18px;
 }
 
 .root [class*="aboutList"] {

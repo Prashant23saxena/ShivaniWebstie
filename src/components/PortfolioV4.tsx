@@ -275,9 +275,7 @@ export default function PortfolioV4() {
       <motion.div className={styles.progress} style={{ scaleX: progress }} aria-hidden />
 
       <header className={styles.header}>
-        <button className={styles.monogram} onClick={() => scrollTo("home")} aria-label="Go home">
-          ST.
-        </button>
+        <span className={v4.headerSpacer} aria-hidden />
         <nav className={styles.desktopNav}>
           {navItems.map((item) => (
             <button key={item.id} className={`${styles.navBtn} ${active === item.label ? styles.navActive : ""}`} onClick={() => scrollTo(item.id)}>
