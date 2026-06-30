@@ -488,7 +488,7 @@
 
 .workCard [class*="chapterYear"] {
   position: absolute;
-  top: -38px;
+  top: -58px;
   left: 22px;
   color: var(--ink);
   font-size: 13px;
