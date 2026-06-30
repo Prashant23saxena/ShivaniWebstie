@@ -237,7 +237,7 @@ export default function PortfolioV4() {
   const reduce = useReducedMotion();
   const [active, setActive] = useState("Home");
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [workIndex, setWorkIndex] = useState(0);
+  const [workIndex, setWorkIndex] = useState<number | null>(null);
   const [strategyIndex, setStrategyIndex] = useState(0);
   const [aboutTab, setAboutTab] = useState("Education");
   const workTrackRef = useRef<HTMLDivElement>(null);
@@ -456,26 +456,26 @@ export default function PortfolioV4() {
         </Reveal>
 
         <AnimatePresence mode="wait">
-          <motion.div className={v4.caseSpotlight} key={workIndex} initial={reduce ? false : { opacity: 0, y: 16 }} animate={reduce ? undefined : { opacity: 1, y: 0 }} exit={reduce ? undefined : { opacity: 0, y: -10 }}>
+          <motion.div className={v4.caseSpotlight} key={workIndex ?? "default"} initial={reduce ? false : { opacity: 0, y: 16 }} animate={reduce ? undefined : { opacity: 1, y: 0 }} exit={reduce ? undefined : { opacity: 0, y: -10 }}>
             <div className={v4.caseLead}>
               <span>Case spotlight</span>
-              <strong>{selectedWork[workIndex].company}</strong>
-              <p>{selectedWork[workIndex].industry} · {selectedWork[workIndex].year} · {selectedWork[workIndex].metric}</p>
+              <strong>{selectedWork[workIndex ?? 0].company}</strong>
+              <p>{selectedWork[workIndex ?? 0].industry} · {selectedWork[workIndex ?? 0].year} · {selectedWork[workIndex ?? 0].metric}</p>
             </div>
             <div>
               <Search size={27} strokeWidth={1.25} />
               <span>Problem statement</span>
-              <p>{selectedWork[workIndex].problem}</p>
+              <p>{selectedWork[workIndex ?? 0].problem}</p>
             </div>
             <div>
               <UserRound size={27} strokeWidth={1.25} />
               <span>My role</span>
-              <p>{selectedWork[workIndex].role}</p>
+              <p>{selectedWork[workIndex ?? 0].role}</p>
             </div>
             <div>
               <BarChart3 size={27} strokeWidth={1.25} />
               <span>Impact</span>
-              <p>{selectedWork[workIndex].impact}</p>
+              <p>{selectedWork[workIndex ?? 0].impact}</p>
             </div>
           </motion.div>
         </AnimatePresence>
